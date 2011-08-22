@@ -1,8 +1,8 @@
 # Copyright(c) gert.cuykens@gmail.com
 from json import loads
-from appwsgi.db import Db
-from appwsgi.session import Session
-from appwsgi.response import text
+from db import Db
+from session import Session
+from response import text
 
 def application(environ, response):
     sid = None if not 'HTTP_COOKIE' in environ else environ['HTTP_COOKIE']
@@ -14,7 +14,7 @@ def application(environ, response):
         s.GID =''
         db.execute("SELECT aid, calendar, appointment FROM appointments WHERE calendar >= ? AND calendar < ?",(v['from'],v['to']))
         return text(response,db,s)
-    def find(): 
+    def find():
         s = Session(sid,db,'guest')
         s.GID =''
         db.execute("SELECT aid, calendar, appointment FROM appointments WHERE calendar >= ? AND appointment LIKE ?",(v['calendar'],"%"+v['appointment']+"%"))
@@ -55,7 +55,7 @@ def application(environ, response):
             'ca'       : ca,
             'insert'   : insert,
             'update'   : update,
-            'remove'   : remove, 
+            'remove'   : remove,
             'name'     : name}
 
     return func[v['cmd']]()

@@ -1,6 +1,6 @@
 # Copyright(c) gert.cuykens@gmail.com
 from json import loads, dumps
-from appwsgi.db import Db
+from db import Db
 
 def application(environ, response):
     v = loads(environ['wsgi.input'].read(int(environ['CONTENT_LENGTH'])).decode('utf-8'))

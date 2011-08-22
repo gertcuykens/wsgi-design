@@ -79,8 +79,7 @@ def wget(url):
 
 if __name__ == '__main__':
     if int(sys.version.split(' ')[0][0])<3: print('python 3 needed, not',v)
-    #if not os.path.exists('www'): wget('http://appwsgi.googlecode.com/hg/www')
-    #if not os.path.exists('wsgi'): wget('http://appwsgi.googlecode.com/hg/wsgi')
+    #if not os.path.exists(''): wget('')
     sql()
     print('GET http://127.0.0.1:8000/www/index.htm')
     from wsgiref.simple_server import make_server

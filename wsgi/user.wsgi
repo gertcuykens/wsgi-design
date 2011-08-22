@@ -1,8 +1,8 @@
 # Copyright(c) gert.cuykens@gmail.com
 from json import loads
-from appwsgi.db import Db
-from appwsgi.session import Session
-from appwsgi.response import text
+from db import Db
+from session import Session
+from response import text
 from time import strftime, gmtime, time
 from binascii import hexlify
 from os import urandom
@@ -17,7 +17,7 @@ def application(environ, response):
         mail(v['uid'],'password',db)
         s =  Session(sid,db,'guest')
         return text(response,db,s)
-    def logout(): 
+    def logout():
         db.execute('UPDATE sessions SET exp=? WHERE sid=?',(strftime('%Y-%m-%d %H:%M:%S', gmtime(time()-1)),sid))
         s = Session(sid,db,'guest')
         return text(response,db,s)
@@ -36,7 +36,7 @@ def application(environ, response):
         else: raise RuntimeError('Failed to generate unique session ID')
         s = Session(sid,db,'guest')
         return text(response,db,s)
-    def delete(): 
+    def delete():
         s = Session(sid,db,'guest')
         db.execute('DELETE FROM users WHERE uid=?',(s.UID,))
         db.execute('DELETE FROM sessions WHERE uid=?',(s.UID,)) # sqlite no foreign key yet
@@ -60,7 +60,7 @@ def application(environ, response):
         else: db.rollback()
         db.execute('SELECT uid FROM sessions WHERE sid=?',(s.SID,))
         return text(response,db,s)
-    def select(): 
+    def select():
         s = Session(sid,db,'guest')
         db.execute('SELECT uid,name,adress,city,country,phone FROM users WHERE uid=?',(s.UID,))
         return text(response,db,s)
@@ -87,7 +87,7 @@ def application(environ, response):
 
 """
 # http://groups.google.be/group/comp.lang.python/browse_thread/thread/be5a9575d7dbf8f3#
-# First copy the row if it exists 
+# First copy the row if it exists
 db.execute('''insert into "users"
               select ?, "name", adress, city, country, phone, picture
               from "users" where "uid" = ? ''', (v['uid'],s.UID) )
@@ -101,6 +101,6 @@ db.execute('''update "sessions" set "uid" = ?
 #Do the same for the "groups" table, then
 # finally delete the original row (again only if the new row exists )
 db.execute('''delete from "users"
-              where "uid" = ? and exists( select * from "users" where "uid" = ?) ''', (s.SID, v['uid']) ) 
+              where "uid" = ? and exists( select * from "users" where "uid" = ?) ''', (s.SID, v['uid']) )
 """
 

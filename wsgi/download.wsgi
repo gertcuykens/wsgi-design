@@ -1,6 +1,6 @@
 # Copyright(c) gert.cuykens@gmail.com
-from appwsgi.db import Db
-from appwsgi.session import Session
+from db import Db
+from session import Session
 
 def application(environ, response):
     sid = None if not 'HTTP_COOKIE' in environ else environ['HTTP_COOKIE']
@@ -13,7 +13,7 @@ def application(environ, response):
         l=fp[0][1]
         if not f: raise Exception
     except:
-        with open('appwsgi/www/bin/picture.png','rb') as fp: f=fp.read()
+        with open('www/bin/picture.png','rb') as fp: f=fp.read()
         l=len(f)
     response('200 OK', [('Set-Cookie',str(s.SID)), ('Content-type','image/png'), ('Content-Length',str(l))])
     return [f]

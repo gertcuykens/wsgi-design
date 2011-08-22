@@ -1,6 +1,6 @@
 # Copyright(c) gert.cuykens@gmail.com
-from appwsgi.db import Db
-from appwsgi.session import Session
+from db import Db
+from session import Session
 
 def application(environ, response):
     sid = None if not 'HTTP_COOKIE' in environ else environ['HTTP_COOKIE']
@@ -16,18 +16,18 @@ def application(environ, response):
 """
     from re import search,DOTALL
     chunk=environ['wsgi.input'].read(int(environ['CONTENT_LENGTH'])).decode('latin1')
-    b=environ['CONTENT_TYPE'].split('boundary=')[1]   
-    chunk=search(b+r'.*?Content-Type: application/octet-stream\r\n\r\n(.*?)\r\n--'+b,chunk,DOTALL).group(1).encode('latin1') 
+    b=environ['CONTENT_TYPE'].split('boundary=')[1]
+    chunk=search(b+r'.*?Content-Type: application/octet-stream\r\n\r\n(.*?)\r\n--'+b,chunk,DOTALL).group(1).encode('latin1')
     from cgi import FieldStorage
     form = FieldStorage(fp=environ['wsgi.input'], environ=environ)
     chunk = form['Filedata'].file.read()
- 
+
     v = environ['wsgi.input'].read(int(environ['CONTENT_LENGTH'])).decode('latin1')
     import sys
     print (v, file=sys.stderr)
-    with open('/root/http/appwsgi/www/gert.png','wb') as f:
+    with open('/root/http/www/gert.png','wb') as f:
         f.write(v)
- 
+
 def buffer(f, length=-1, size=8192):
     while length<0:
       chunk = f.read(size)

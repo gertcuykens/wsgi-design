@@ -1,8 +1,8 @@
 # Copyright(c) gert.cuykens@gmail.com
 from json import loads
-from appwsgi.db import Db
-from appwsgi.session import Session
-from appwsgi.response import text
+from db import Db
+from session import Session
+from response import text
 from binascii import hexlify
 from os import urandom
 
@@ -19,7 +19,7 @@ def application(environ, response):
         s = Session(sid,db,'guest')
         db.execute("SELECT p.pid,p.txt,p.price,p.qty-IFNULL(q.qty_sold,0) 'qty_available' FROM PRODUCTS p LEFT JOIN (SELECT o.pid 'pid', SUM(o.qty) 'qty_sold' FROM ORDERS o GROUP BY pid) q ON q.pid=p.pid WHERE ? LIKE ?",('txt','%'+v['txt']+'%',))
         return text(response,db,s)
-    def insert(): 
+    def insert():
         s = Session(sid,db,'guest')
         if v['qty']==0:
             db.execute("DELETE FROM orders WHERE pid=? AND uid=? AND oid='new'",(v['pid'],s.UID))
@@ -30,7 +30,7 @@ def application(environ, response):
     def pay():
         s = Session(sid,db,'guest')
         for i in range(3):
-            r=hexlify(urandom(8)).decode('ascii') 
+            r=hexlify(urandom(8)).decode('ascii')
             db.execute("SELECT count(*) FROM orders WHERE oid=?",(r,))
             if db.fetch()[0][0]==0:
                 db.execute("UPDATE orders SET oid=? WHERE uid=? AND oid='new'",(r,s.UID))
@@ -43,6 +43,6 @@ def application(environ, response):
             'find': find,
             'insert': insert,
             'pay': pay}
- 
+
     return func[v['cmd']]()
 
