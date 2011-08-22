@@ -1,0 +1,31 @@
+/* Copyright(c) gert.cuykens@gmail.com */
+* {margin:0px;padding:0px;}
+
+html,body {height:100%;width:100%;}
+
+input {width:142px;
+       margin:2px;}
+
+#form {padding-top:11px;
+       width:230px;
+       text-align:right;}
+
+#menu {position:absolute;
+       left:80px;
+       width:145px;
+       text-align:right;}
+
+#products {position:absolute;
+           top:0px;left:240px;}
+
+#select{width:145px;}
+#update{width:145px;}
+#delete{width:145px;}
+#insert{width:145px;}
+
+.des {background-color:silver;
+      text-align:center;
+      background-repeat:no-repeat;
+      background-position:0px 2px;
+      padding:0px 10px 0px 10px;}
+

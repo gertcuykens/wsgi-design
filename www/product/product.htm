@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- Copyright(c) gert.cuykens@gmail.com -->
+<html>
+ <head>
+  <title>product</title>
+  <link   type="image/x-icon"   href="../bin/fx.ico"      rel="icon"/>
+  <link   type="text/css"       href="product.css"        rel="stylesheet"/>
+  <script src="../lib/dg.js"></script>
+  <script src="../lib/http.js"></script>
+  <script src="product.js"></script>
+ </head>
+ <body>
+  <div id="form">
+   pid:    <input id="pid"   type="text"/><br/>
+   txt:    <input id="txt"   type="text"/><br/>
+   price:  <input id="price" type="text"/><br/>
+   qty:    <input id="qty"   type="text"/><br/>
+  </div>
+  <div id="menu">
+   <input id="select"  type="button" value="select" onclick="product.select()"/>
+   <input id="insert"  type="button" value="insert" onclick="product.insert()"/> 
+   <input id="update"  type="button" value="update" onclick="product.update()"/> 
+   <input id="delete"  type="button" value="delete" onclick="product.remove()"/>
+  </div>
+  <table id="products"></table>
+ </body>
+</html>

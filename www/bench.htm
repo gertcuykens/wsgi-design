@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- Copyright(c) gert.cuykens@gmail.com -->
+<html>
+ <head>
+  <title>bench</title>
+ </head>
+ <body>
+  <table id="stat"><tr><td></td></tr></table>
+  <script>
+    table=
+    {
+     'process':{}, 
+     'render':function()
+     {
+      var tb=document.getElementById('stat')
+      tb.innerHTML=""
+      for(var i in table.process)
+      {
+       var tr=document.createElement('tr')
+       var th=document.createElement('th')
+       th.innerHTML=i
+       tr.appendChild(th)
+       tb.appendChild(tr)
+       for(var j in table.process[i])
+       {
+        var tr=document.createElement('tr')
+        for(var k in table.process[i][j])
+        {
+         var td=document.createElement('td')
+         td.innerHTML=table.process[i][j][k]
+         tr.appendChild(td)
+        }
+        tb.appendChild(tr)
+       }
+      }
+     }
+    }
+
+    while(true)
+    {
+     xmlHttp=new XMLHttpRequest()
+     xmlHttp.open('GET','../../wsgi/bench.wsgi',false)
+     xmlHttp.send()
+     v=JSON.parse(xmlHttp.responseText)
+     table['process'][v.process_id]=v.threads_details
+     table.render()
+    }
+  </script>
+ </body>
+</html>
+

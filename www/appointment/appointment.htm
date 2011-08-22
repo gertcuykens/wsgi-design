@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- Copyright(c) gert.cuykens@gmail.com -->
+<html>
+ <head>
+  <title>appointment</title>
+  <link  href="appointment.css" type="text/css" rel="stylesheet"/>
+  <script src="../lib/login.js"></script>
+  <script src="../lib/session.js"></script>
+  <script src="../lib/sha1.js"></script>
+  <script src="../lib/shader.js"></script>
+  <script src="../lib/center.js"></script>
+  <script src="../lib/dg.js"></script>
+  <script src="../lib/http.js"></script>
+  <script src="../lib/calendar.js"></script>
+  <script src="appointment.js"></script>
+ </head>
+ <body>
+  <table>
+   <tfoot><tr><td id="cmd" colspan="7"><span id="year"></span>- <span id="month"></span><span id="date"></span><input id="session" type="button" value="logout" onclick="session.logout()"/></td></tr></tfoot>
+   <tbody id="appointments"></tbody>
+  </table>
+  <script>
+   calendar=new Date()
+   appointment.cmd()
+   appointment.overview()
+  </script>
+ </body>
+</html>

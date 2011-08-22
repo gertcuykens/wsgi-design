@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- Copyright(c) gert.cuykens@gmail.com -->
+<html>
+ <head>
+  <title>query</title>
+  <script src="../lib/http.js"></script>
+  <script src="../lib/dg.js"></script>
+  <script>
+   submit=function()
+   {
+    document.getElementById('result').innerHTML=''
+    http.xml='{"sql":"'+document.getElementById('sql').value.replace(/\n/g,' ')+'"}'
+    http.fml=function(v){dg.init({'id':'result','rec':v.rec,'des':v.des,'onselect':function(){}})}
+    http.url='../../wsgi/query.wsgi'
+    http.send()
+   }
+  </script>
+  <style>
+   .des {background-color:silver;
+         text-align:center;
+         background-repeat:no-repeat;
+         background-position:0px 2px;
+         padding:0px 10px 0px 10px;}
+  </style>
+ </head>
+ <body>
+  <div style="text-align:right;margin-right:6px">
+   <textarea id="sql" style="width:100%" rows="5" cols="5">select uid from users;</textarea>
+   <input type="button" value="run" onclick="submit()"/>
+  </div>
+  <table id="result" style="margin-top:10px"></table>
+ </body>
+</html>

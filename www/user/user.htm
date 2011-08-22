@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- Copyright(c) gert.cuykens@gmail.com -->
+<html>
+ <head>
+  <title>user</title>
+  <link   type="text/css" href="user.css" rel="stylesheet"/>
+  <script src="../lib/session.js"></script>
+  <script src="../lib/login.js"></script>
+  <script src="../lib/sha1.js"></script>
+  <script src="../lib/http.js"></script>
+  <script src="../lib/shader.js"></script>
+  <script src="../lib/center.js"></script>
+  <script src="user.js"></script>
+ </head>
+ <body>
+  <div id="register">
+   email:   <input id="email" readonly="readonly" onclick="user.email()" onfocus="blur();"/><br/>
+   name:    <input id="name"/><br/>
+   adress:  <input id="adress"/><br/>
+   city:    <input id="city"/><br/>
+   country: <input id="country"/><br/>
+   phone:   <input id="phone"/><br/>
+   <input id="delete"  type="button" value="delete" onclick="user.del()"/><br/>
+   <input id="update"  type="button" value="update" onclick="user.update()"/><br/>
+   <input id="passwd"  type="button" value="passwd" onclick="user.passwd()"/><br/>
+   <input id="session" type="button" value="logout" onclick="user.clear()"/><br/>
+   <img id="box" src="../../wsgi/download.wsgi"/>
+  </div>
+  <div id="status"/>
+  <script>
+   session.load=user.select
+   session.load()
+   upload.dropbox(document.getElementById('box'))
+  </script>
+ </body>
+</html>

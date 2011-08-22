@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!-- Copyright(c) gert.cuykens@gmail.com -->
+<html>
+ <head>
+  <title>forum</title>
+  <link  href="forum.css" type="text/css" rel="stylesheet"/>
+  <script src="../lib/session.js"/></script>
+  <script src="../lib/login.js"/></script>
+  <script src="../lib/sha1.js"/></script>
+  <script src="../lib/shader.js"/></script>
+  <script src="../lib/center.js"/></script>
+  <script src="../lib/dg.js"/></script>
+  <script src="../lib/http.js"/></script>
+  <script src="forum.js"/></script>
+ </head>
+ <body>
+  <div id="form">
+   <ul>
+    <li id="topics"   onclick="document.getElementById('text').value='';forum.topic='-1';forum.nr='new';forum.find('topics');document.getElementById('text').focus()">topics</li>
+    <li id="threads"  onclick="document.getElementById('text').value='';forum.thread='-1';forum.nr='new';forum.find('threads');document.getElementById('text').focus()">threads</li>
+    <li id="messages" onclick="document.getElementById('text').value='';forum.message='-1';forum.nr='new';forum.find('messages');document.getElementById('text').focus()">messages</li>
+   </ul>
+   <input id="save"     type="button" value="save"     onclick="forum.save()"/>
+   <input id="remove"   type="button" value="del"      onclick="forum.remove()"/>
+   <input id="find"     type="button" value="find"     onclick="forum.find('')"/>
+   <input id="all"      type="button" value="find all" onclick="forum.findAll()"/>
+   <textarea id="text" rows="0" cols="0"/></textarea>
+  </div>
+  <table id="data"/></table>
+  <div id="session" onclick="session.logout();login()"/>
+ </body>
+</html>

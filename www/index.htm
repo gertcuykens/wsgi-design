@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- Copyright(c) gert.cuykens@gmail.com -->
+<html>
+ <head>
+  <title>index</title>
+ </head>
+ <body>
+  <div>
+   All examples are tested in Chrome.<br/>
+   <a href="appointment/appointment.htm">appointment</a> Click on the numbers or text. (rewriting month, year, time selectors)<br/>
+   <a href="forum/forum.htm">forum</a> Click on the links to navigate the forum. Click the picture to login.<br/>
+   <a href="media/media.htm">media</a> Examples on media in html5.<br/>
+   <a href="product/product.htm">product</a> You can put in product information.<br/>
+   <a href="product/order.htm">order</a> After you have put in products you can order them.<br/>
+   <a href="query/query.htm">query</a> Run sql statements on the database.<br/>
+   <a href="query/query2.htm">query2</a> Run sql statements on the database. (experimental nodejs server)<br/>
+   <a href="user/user.htm">user</a> Register login information used by all other examples. You can drag en drop your picture to upload.<br/>
+   <a href="vi/vi.htm">vi</a> Edit online files on the server.<br/>
+   <a href="javascript:test()">webSocket</a> Test web socket. (experimental nodejs server)<br/>
+  </div>
+  <script>
+   var console=document.createElement('pre')
+   console.log=function(v){this.innerHTML+=v+'\n'}
+   document.body.appendChild(console)
+   var myWebSocket= new WebSocket('ws://127.0.0.1:8000/appwsgi/db.bin')
+   myWebSocket.onopen=function(e){console.log('connection open')}
+   myWebSocket.onmessage=function(e){console.log(e.data);var v=JSON.parse(e.data)}
+   myWebSocket.onclose=function(e){console.log('connection closed')}
+   var test=function(){myWebSocket.send('SELECT uid FROM users')}
+  </script>
+ </body>
+</html>
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- Copyright(c) gert.cuykens@gmail.com -->
+<html>
+ <head>
+  <title>vi</title>
+  <link  href="vi.css" type="text/css" rel="stylesheet"/>
+  <script src="../lib/session.js"></script>
+  <script src="../lib/login.js"></script>
+  <script src="../lib/sha1.js"></script>
+  <script src="../lib/shader.js"></script>
+  <script src="../lib/center.js"></script>
+  <script src="../lib/http.js"></script>
+  <script src="vi.js"></script>
+ </head>
+ <body>
+  <div id="menu">
+   <textarea id="text" rows="0" cols="0"/></textarea>
+   <input type="button" value="write" onclick="vi.write()"/>
+   <input id="session" type="button" value="logout" onclick="session.logout()"/>
+  </div>
+  <script>session.load()</script>
+ </body>
+</html>
